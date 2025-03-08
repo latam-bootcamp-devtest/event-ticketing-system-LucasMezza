@@ -3,11 +3,6 @@ import { NavLink } from 'react-router-dom'
 export const EventsList = ({events = []}) => {
   return (
     <section>
-      <header className='btn-back'>
-        <NavLink to={`/booking-history`} >
-          User history books
-        </NavLink>
-      </header>
         {events && events.length > 0 ?
           <ul className="events-list">
             {events.map(row => (
