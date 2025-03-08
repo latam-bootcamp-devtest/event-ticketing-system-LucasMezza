@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 
-export const EventsList = ({events = []}) => {
+export const EventsList = ({events = [], user = 'user', handleEdit = () => {}, handleDelete = () => {}}) => {
   return (
     <section>
         {events && events.length > 0 ?
@@ -13,6 +13,12 @@ export const EventsList = ({events = []}) => {
                   <span>Date: {row.date.split('T')[0]}</span>
                   <em>Ticket price: ${row.price}</em>
                 </NavLink>
+                {user == 'admin' ?
+                  <div>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                  </div>
+                : null}
               </li>
             ))}
           </ul>

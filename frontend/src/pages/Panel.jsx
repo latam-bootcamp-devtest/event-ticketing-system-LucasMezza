@@ -19,7 +19,7 @@ export const Panel = () => {
         <p>Events list</p>
         <button>Create event</button>
       </div>
-      <EventsList events={events}/>
+      <EventsList events={events} user={'admin'}/>
     </div>
   </section>
   )

@@ -19,7 +19,7 @@ export const Home = () => {
         User history books
       </NavLink>
     </header>
-    <EventsList events={events}/>
+    <EventsList events={events} user={'user'}/>
   </section>
   )
 }
