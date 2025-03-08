@@ -148,7 +148,6 @@ router.get("/users/:userId/tickets", async (req, res) => {
       name: search 
       }).skip(skipEvents).limit(pageSize)
 
-    console.log(events)
     if(sort) {
       events.sort((a,b) => new Date(a.date).getTime() - new Date(b.date).getTime())
     }
