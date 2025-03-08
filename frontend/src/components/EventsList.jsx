@@ -15,8 +15,8 @@ export const EventsList = ({events = [], user = 'user', handleEdit = () => {}, h
                 </NavLink>
                 {user == 'admin' ?
                   <div>
-                    <button>Edit</button>
-                    <button>Delete</button>
+                    <button onClick={e => handleEdit(e, row.id)}>Edit</button>
+                    <button onClick={e => handleDelete(e, row.id)}>Delete</button>
                   </div>
                 : null}
               </li>

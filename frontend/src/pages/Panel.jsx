@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
-import { getEvents } from "../services/crud";
+import { deleteEvent, getEvents } from "../services/crud";
 import { EventsList } from "../components/EventsList";
 
 export const Panel = () => {
   const [ events, setEvents ] = useState([])
+  const [ error, setError ] = useState('')
+
+  const handleEdit = (e, id) => {}
+
+  const handleDelete = (e, id) => {}
 
   useEffect(() => {
     getEvents()
@@ -19,7 +24,7 @@ export const Panel = () => {
         <p>Events list</p>
         <button>Create event</button>
       </div>
-      <EventsList events={events} user={'admin'}/>
+      <EventsList events={events} user={'admin'} handleEdit={handleEdit} handleDelete={handleDelete}/>
     </div>
   </section>
   )
