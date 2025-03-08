@@ -35,12 +35,18 @@ router.get("/events", async (req, res) => {
   const skipEvents = (page - 1) * pageSize;
 
   try {
-    const results = await Event.find().skip(skipEvents).limit(pageSize)
-    const currentDate = Date.now()
-    const events = results.filter(row => new Date(row.date).getTime() > currentDate)
+    const currentDate = new Date(Date.now()).toISOString().split('T')[0]
+    const events = await Event.find({date : { $gt: "2025-03-10" }}).skip(skipEvents).limit(pageSize)
 
     events.sort((a,b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-    res.status(201).json(events)
+
+    const totalDocuments = await Event.countDocuments({date : { $gt: "2025-03-10" }})
+    const totalPages = Math.ceil(totalDocuments / pageSize);
+    res.status(201).json({
+      currentPage: page,
+      pageSize: pageSize,
+      totalPages: totalPages,
+      events: events})
   } catch {
     res.status(500).json({ error: "Server error"})
   }
