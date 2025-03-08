@@ -87,4 +87,41 @@ router.post("/tickets", async (req, res) => {
   }
 })
 
+router.delete("/tickets/:ticketId", async (req, res) => {
+  const { ticketId } = req.params;
+
+  try {
+    const ticketExist = await Ticket.findOne({ _id: ticketId })
+    
+    if(!ticketExist) {
+      return res.status(404).json({ error: "Ticket not found"})
+    }
+
+    const currentDate = Date.now()
+    if(new Date(ticketExist.date).getTime() < currentDate) {
+      return res.status(404).json({ error: "Cannot cancel past events"})
+    }
+
+    const eventId = ticketExist.eventId;
+    const deleteDoc = await Ticket.findOneAndDelete({ _id: ticketId })
+    
+    if(!deleteDoc) {
+      return res.status(400).json({ error: "Server error"})
+    }
+
+    const eventExist = await Event.findOne({ _id: eventId })
+    
+    if(!eventExist) {
+      return res.status(404).json({ error: "Event not found"})
+    }
+
+    eventExist.availableSeats += 1;
+
+    await eventExist.save();
+    res.status(204).json({ message: "Ticket deleted successfully" });
+  } catch {
+    res.status(500).json({ error: "Server error"})
+  }
+})
+
 module.exports = router;
