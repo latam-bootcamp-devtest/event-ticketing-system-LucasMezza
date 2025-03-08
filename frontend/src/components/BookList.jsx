@@ -1,0 +1,19 @@
+export const BookList = ({events = []}) => {
+  return (
+    <section>
+        {events && events.length > 0 ?
+          <ul className="events-list">
+            {events.map(row => (
+              <li key={row.id} className="event">
+                <img src={row.image} alt="" />
+                <p>Name: {row.name}</p>
+                <span>Date: {row.date.split('T')[0]}</span>
+                <em>Ticket quantity: ${row.ticketQuantity}</em>
+              </li>
+            ))}
+          </ul>
+          : <p>There is not any ticket</p>
+        }
+    </section>
+  )
+}
