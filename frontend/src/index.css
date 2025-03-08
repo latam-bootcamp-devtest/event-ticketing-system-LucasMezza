@@ -9,6 +9,9 @@ ul {
 section {
   padding: 1em;
 }
+img {
+  width: 100%;
+}
 .events-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -18,11 +21,39 @@ section {
   border: 1px solid black;
   border-radius: .5em;
   padding: 1em;
+}
+.event a {
   display: flex;
   flex-direction: column;
   gap: .5em;
+  text-decoration: none;
+  color: #000;
 }
 .event img {
   width: 100%;
   border-radius: .5em;
+}
+.btn-back {
+  background-color: black;
+  padding: .5em 1em;
+  border-radius: .5em; 
+  width: max-content;
+}
+.btn-back a {
+  color: #fff;
+  text-decoration: none;
+}
+.event-detail div  {
+  display: flex;
+  align-items: start;
+  gap: 1em;
+  margin-top: 2em;
+}
+.event-detail article {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.event-detail aside {
+  width: 40%;
 }
